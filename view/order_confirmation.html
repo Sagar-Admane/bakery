@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'
+            rel='stylesheet'>
+
+</head>
+<body>
+    <div id="main">
+        <div class="nav">
+            <div class="logo"><img
+                    src="./White And Pink Simple Cake Shop Logo.png"
+                    height="175px" width="175px"></div>
+            <div class="links">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">about us</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="shop.html"><i
+                                class='bx bxs-shopping-bag'></i><button
+                                class="shop">Our Shop</button></a></li>
+                </ul>
+            </div>
+        </div>
+        <div>
+        <button class="button-54" role="button" style="margin: 45px;">ORDER CONFIRMED!!!</button></div>
+        <div class="con">
+            <div>
+            <h2>Thank You for using our services.</h2>
+            
+            <br>
+            <h3>Do not share your Order Id. Please bring the order Id at the time of takeaway.</h3>
+            <br>
+            <h2>Your Order has been Placed!</h2>
+            <br>
+            <p>Your Order ID is: <strong id="order-id"></strong></p>
+            <p>
+            </div>
+        </div>
+        </div>
+        <script>
+            var orderId = localStorage.getItem("orderId");
+            document.getElementById("order-id").textContent = orderId;
+          </script>
+</body>
+</html>

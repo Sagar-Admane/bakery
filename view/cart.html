@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div id="main">
+        <div class="nav">
+            <div class="logo">
+                <img src="./White And Pink Simple Cake Shop Logo.png" height="175px" width="175px" />
+            </div>
+            <div class="links">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">about us</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li>
+                        <a href="shop.html"><i class="bx bxs-shopping-bag"></i><button class="shop">Our
+                                Shop</button></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div>
+            <button class="button-54" role="button" style="margin: 35px 0px 25px 25px">
+                YOUR CART
+            </button>
+        </div>
+        <div class="cont">
+        <div class="min">
+            <h1>ITEMS THAT YOU ORDERED ARE: </h1>
+            <div>
+            <ul id="cart-items">
+                <!-- Cart items will be dynamically added here -->
+            </ul>
+            </div>
+            <button class="button-54" role="button" style="margin: 35px 0px 25px 25px" onclick="checkout()" id="ABC">CHECKOUT</button>
+</div>
+        </div>
+    </div>
+    <script>
+       var oid = [];
+        displayCart();
+        function displayCart() {
+            var cart = JSON.parse(localStorage.getItem('cart')) || [];
+            var cartList = document.getElementById('cart-items');
+            cartList.innerHTML = '';
+            cart.forEach(function(item) {
+                var li = document.createElement('li');
+                li.textContent = item.item + ' - $' + item.price;
+                cartList.appendChild(li);
+            });
+        }
+
+        function checkout() {
+            var orderId = generateOrderId();
+            localStorage.setItem('orderId', orderId);
+            alert('Your order has been placed! Your Order ID is: ' + orderId);
+            localStorage.removeItem('cart');
+            location.href = 'order_confirmation.html';
+            oid.push(orderId);
+        }
+
+        function generateOrderId() {
+            return Math.random().toString(36).substr(2, 9); // Generate a random alphanumeric string
+        }
+
+        document.getElementById("ABC").addEventListener("click", function(){
+            
+            fetch('/send' ,{
+                method: 'POST',
+                headers : {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({array : oid})
+            })
+            .then(response => {
+                if(response.ok){
+                    console.log("Array sent successfully");
+                } else {
+                    console.log("Failed to send an array");
+                }
+            })
+            .catch(error => {
+                console.log("Error: ". error);
+            });
+        })
+    </script>
+</body>
+
+</html>

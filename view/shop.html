@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'
+    rel='stylesheet'>
+  </head>
+  <body>
+    <div id="main">
+      <div class="nav">
+        <div class="logo">
+          <img
+            src="./White And Pink Simple Cake Shop Logo.png"
+            height="175px"
+            width="175px"
+          />
+        </div>
+        <div class="links">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">about us</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li>
+              <a href="shop.html"
+                ><i class="bx bxs-shopping-bag"></i
+                ><button class="shop">Our Shop</button></a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="heading"><h2><span style="color: rgb(254, 94, 98);">ORDER</span> HERE</h2></div>
+      <div class="container">
+        <div class="first">
+            <div style="text-align: center; border-right: 1px solid #000; padding-top: 20px;">
+                <p style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: larger;">Chocolate Fudge Cake</p>
+                <img src="Untitled design.png" height="200px" width="200px" style="padding-top: 20px;">
+            </div>
+            <div style="text-align: center; padding-top: 20px; background-color: rgb(255, 250, 244); border-radius: 25px;">
+                <p style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: larger;">Rs.65</p>
+                <button class="poi" onclick="addToCart('Chocolate Fudge Cake', 65)">Add to cart</button>
+            </div>
+        </div>
+        <div class="second">
+            <div style="text-align: center; padding-top: 20px; background-color: rgb(255, 250, 244); border-radius: 25px;">
+                <p style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: larger;">Rs.25</p>
+                <button class="poi" onclick="addToCart('Crossiant', 25)">Add to cart</button>
+            </div>
+            <div style="text-align: center; border-left: 1px solid #000; padding-top: 20px;">
+                <p style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: larger;">Crossiant</p>
+                <img src="crossiant.png" height="200px" width="200px" style="padding-top: 20px;">
+            </div>
+        </div>
+        <div class="third">
+            <div style="text-align: center; border-right: 1px solid #000; padding-top: 20px;">
+                <p style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: larger;">Sourdough Bread</p>
+                <img src="bread.png" height="200px" width="200px" style="padding-top: 20px;">
+            </div>
+            <div style="text-align: center; padding-top: 20px; background-color: rgb(255, 250, 244); border-radius: 25px;">
+                <p style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: larger;">Rs.15</p>
+                <button class="poi" onclick="addToCart('Sourdough Bread', 15)">Add to cart</button>
+            </div>
+        </div>
+      </div>
+      <div class="yeh">
+        <a href="cart.html"><button class="button-54" role="button" id="XYZ">PROCEED TO CHECKOUT</button></a>
+    </div>
+    </div>
+    <script>
+      let car = [];
+        function addToCart(item, price) {
+            var cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push({ item: item, price: price });
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert('Item added to cart!');
+            car.push(item);
+            console.log(car);
+        }
+        document.getElementById("XYZ").addEventListener("click", function(){
+              
+          fetch('/send-array', {
+                
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ array: car })
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Array sent successfully!');
+                } else {
+                    console.error('Failed to send array.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        })
+    </script>
+  </body>
+</html>
