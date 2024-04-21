@@ -41,6 +41,7 @@ app.get("/contact.html", (req, res)=>{
 app.post("/contact.html", (req, res)=>{
     res.sendFile(__dirname + "/view/contact.html");
     const a = req.body;
+    console.log(a);
     fs.appendFileSync("message.txt", JSON.stringify(a), function(err){
         if(err) throw err;
         else{
