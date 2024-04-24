@@ -54,7 +54,7 @@
             cartList.innerHTML = '';
             cart.forEach(function(item) {
                 var li = document.createElement('li');
-                li.textContent = item.item + ' - $' + item.price;
+                li.textContent = item.item + ' - Rs.' + item.price;
                 cartList.appendChild(li);
             });
         }
